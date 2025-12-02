@@ -30,6 +30,12 @@ public class Main {
         String q5 = "delete from studentData where sid = 3";
         s.execute(q5);
         System.out.println("Deleted Successfully");
+        String q6 = "update studentData set sname = ? where sid =?";
+        PreparedStatement ps = con.prepareStatement(q6);
+        ps.setString(1,"Sanjay");
+        ps.setInt(2,2);
+        ps.execute();
+        System.out.println("Updated the value by prepared statement");
         con.close();
         System.out.println("Connection Terminated");
     }
