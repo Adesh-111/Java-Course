@@ -29,11 +29,24 @@ public class AdminDao {
         ps1.setString(2, admin.getPassword());
         ps1.setInt(3, admin.getInitialBalance());
         int check1 = ps1.executeUpdate();
-        if (check > 0 && check1 > 0)
+        ps1.close();
+        String query2 = "insert into transaction values (?, ?, ?, ?, ?)";
+        PreparedStatement ps2 = con.prepareStatement(query2);
+        ps2.setString(1, admin.getAccountNo());
+        ps2.setString(2, "Setting initial balance");
+        ps2.setInt(3, 0);
+        ps2.setInt(4, admin.getInitialBalance());
+        ps2.setInt(5, admin.getInitialBalance());
+        int check3 = ps2.executeUpdate();
+        if (check > 0 && check1 > 0 && check3 > 0)
             System.out.println("New Customer Registered Successfully...");
         else
             System.out.println("Registration failed..");
-        ps1.close();
         con.close();
     }
+
+    public void updateCustomer(Admin admin) throws Exception{
+
+    }
+
 }
